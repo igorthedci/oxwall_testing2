@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from page_objects import locators
+import time
 
 
 class Oxwall:
@@ -34,3 +35,16 @@ class Oxwall:
         menu = self.driver.find_element(By.LINK_TEXT, user.title())
         self.actions.move_to_element(menu).perform()
         self.driver.find_element(By.XPATH, './/a[contains(@href,"sign-out")]').click()
+
+    def create_comment(self, text):
+        newsfeed = self.driver.find_element_by_name("status")
+        newsfeed.click()
+        newsfeed.clear()
+        newsfeed.click()
+        newsfeed.send_keys(text)
+        send_button = self.driver.find_element_by_name("save")
+        send_button.click()
+        time.sleep(2)
+
+    def get_comments(self):
+        return self.driver.find_elements_by_class_name("ow_newsfeed_content")
