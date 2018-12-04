@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from locators import locator
 import time
 
 # Open browser and Oxwall site, driver settings
@@ -13,17 +14,17 @@ driver.maximize_window()
 wait = WebDriverWait(driver, 5)
 
 # Login
-driver.find_element(By.XPATH, '//*[contains(@id,"console_item")]/span[1]').click()
-login = driver.find_element(By.NAME, 'identity')
+driver.find_element(*locator.SIGN_IN_MENU).click()
+login = driver.find_element(*locator.LOGIN_FIELD)
 login.click()
 login.send_keys('admin')
-passw = driver.find_element(By.NAME, 'password')
+passw = driver.find_element(*locator.PASS_FIELD)
 passw.click()
 passw.send_keys('pass')
-driver.find_element(By.XPATH, "//div[@class='ow_right']").click()
+driver.find_element(*locator.SIGN_IN_BUTTON).click()
 
 # Wait until grey background disappeared
-wait.until(EC.invisibility_of_element_located((By.ID, "floatbox_overlay")))
+wait.until(EC.invisibility_of_element_located(locator.LOGIN_BACKGROUND))
 
 # Write some text to Newsfeed form and send it
 newsfeed = driver.find_element_by_name("status")
