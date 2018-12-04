@@ -41,10 +41,10 @@ def login(driver, user):
 
 
 @pytest.fixture()
-def logout(user):
+def logout(driver, user):
     yield             # Because we need to do it after test
     # Logout
-    menu = driver.find_element(By.LINK_TEXT, user.title())
+    menu = driver.find_element(By.LINK_TEXT, user["username"].title())
     actions = ActionChains(driver)
     actions.move_to_element(menu).perform()
     driver.find_element(By.XPATH, './/a[contains(@href,"sign-out")]').click()
