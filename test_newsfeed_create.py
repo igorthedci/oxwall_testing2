@@ -13,18 +13,22 @@ driver.implicitly_wait(5)
 driver.maximize_window()
 wait = WebDriverWait(driver, 5)
 
-# Login
-driver.find_element(*locator.SIGN_IN_MENU).click()
-login = driver.find_element(*locator.LOGIN_FIELD)
-login.click()
-login.send_keys('admin')
-passw = driver.find_element(*locator.PASS_FIELD)
-passw.click()
-passw.send_keys('pass')
-driver.find_element(*locator.SIGN_IN_BUTTON).click()
 
-# Wait until grey background disappeared
-wait.until(EC.invisibility_of_element_located(locator.LOGIN_BACKGROUND))
+def login_as(username, password):
+    # Login
+    driver.find_element(*locator.SIGN_IN_MENU).click()
+    login = driver.find_element(*locator.LOGIN_FIELD)
+    login.click()
+    login.send_keys(username)
+    passw = driver.find_element(*locator.PASS_FIELD)
+    passw.click()
+    passw.send_keys(password)
+    driver.find_element(*locator.SIGN_IN_BUTTON).click()
+    # Wait until grey background disappeared
+    wait.until(EC.invisibility_of_element_located(locator.LOGIN_BACKGROUND))
+
+
+login_as('admin', 'pass')
 
 # Write some text to Newsfeed form and send it
 newsfeed = driver.find_element_by_name("status")
@@ -37,6 +41,7 @@ newsfeed.send_keys(test_text)
 send_button = driver.find_element_by_name("save")
 send_button.click()
 
+# Wait until new status appear
 time.sleep(2)
 
 # Verification that new status with this text appeared
