@@ -49,11 +49,16 @@ text_element = driver.find_elements_by_class_name("ow_newsfeed_content")
 expected_text = test_text[-2]
 assert text_element[0].text == expected_text
 
-#Logout
-menu = driver.find_element(By.LINK_TEXT, 'Admin')
-actions = ActionChains(driver)
-actions.move_to_element(menu).perform()
-driver.find_element(By.XPATH, './/a[contains(@href,"sign-out")]').click()
+
+def logout(user):
+    # Logout
+    menu = driver.find_element(By.LINK_TEXT, user.title())
+    actions = ActionChains(driver)
+    actions.move_to_element(menu).perform()
+    driver.find_element(By.XPATH, './/a[contains(@href,"sign-out")]').click()
+
+
+logout('admin')
 
 # Close browser
 driver.close()
