@@ -1,7 +1,11 @@
-def test_add_text_status(app, sign_in_session):
+from oxwall_site_model import OxwallSite
+
+
+def test_add_text_status(driver, sign_in_session):
     test_text = "Shit happens!!!:("
     expected_text = test_text[-2]
 
+    app = OxwallSite(driver)
     app.add_new_text_status(test_text)
     app.wait_until_new_status_appeared()
     # Verification that new status with this text appeared

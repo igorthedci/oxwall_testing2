@@ -1,6 +1,5 @@
 import pytest
 from selenium import webdriver
-from oxwall_site_model import OxwallSite
 
 
 @pytest.fixture()
@@ -13,10 +12,6 @@ def driver():
     # Close browser
     driver.quit()
 
-@pytest.fixture()
-def app(driver):
-    app = OxwallSite(driver)
-    return app
 
 @pytest.fixture()
 def user():
