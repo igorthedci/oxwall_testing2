@@ -34,20 +34,26 @@ class OxwallSite:
         self.actions.move_to_element(menu).perform()
         self.driver.find_element(By.XPATH, './/a[contains(@href,"sign-out")]').click()
 
-    def add_new_text_status(self, test_text):
+    def add_new_text_status(self, text):
         driver = self.driver
         # Write some text to Newsfeed form and send it
         newsfeed = driver.find_element_by_name("status")
         newsfeed.click()
         newsfeed.clear()
         newsfeed.click()
-        newsfeed.send_keys(test_text)
+        newsfeed.send_keys(text)
         send_button = driver.find_element_by_name("save")
         send_button.click()
 
     def wait_until_new_status_appeared(self):
-        # Wait until new status appear
-        time.sleep(2)
+        # TODO You need to do smart explicit wait!!!
+        time.sleep(5)
 
     def get_newsfeed_list(self):
         return self.driver.find_elements_by_class_name("ow_newsfeed_content")
+
+    def get_newsfeed_users(self):
+        return self.driver.find_elements(By.CSS_SELECTOR, "div.ow_newsfeed_string.ow_small.ow_smallmargin > a")
+
+    def get_newsfeed_times(self):
+        return self.driver.find_elements(By.CSS_SELECTOR, "div.ow_newsfeed_btns.ow_small.ow_remark.clearfix > a")
