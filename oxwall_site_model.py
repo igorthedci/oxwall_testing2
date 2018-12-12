@@ -20,17 +20,17 @@ class OxwallSite:
         driver.find_element(*locator.SIGN_IN_MENU).click()
         login = driver.find_element(*locator.LOGIN_FIELD)
         login.click()
-        login.send_keys(user["username"])
+        login.send_keys(user.username)
         passw = driver.find_element(*locator.PASS_FIELD)
         passw.click()
-        passw.send_keys(user["password"])
+        passw.send_keys(user.password)
         driver.find_element(*locator.SIGN_IN_BUTTON).click()
         # Wait until grey background disappeared
         wait = WebDriverWait(driver, 5)
         wait.until(EC.invisibility_of_element_located(locator.LOGIN_BACKGROUND))
 
     def logout_as(self, user):
-        menu = self.driver.find_element(By.LINK_TEXT, user["username"].title())
+        menu = self.driver.find_element(By.LINK_TEXT, user.username.title())
         self.actions.move_to_element(menu).perform()
         self.driver.find_element(By.XPATH, './/a[contains(@href,"sign-out")]').click()
 
