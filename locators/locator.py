@@ -17,6 +17,7 @@ class SignInLocators:
     PASS_FIELD = (By.NAME, 'password')
     SIGN_IN_BUTTON = (By.XPATH, "//div[@class='ow_right']")
     LOGIN_BACKGROUND = (By.ID, "floatbox_overlay")
+    LOGIN_WINDOW_BOX = (By.CLASS_NAME, "floatbox_container")
 
 # Newsfeed locators ...
 

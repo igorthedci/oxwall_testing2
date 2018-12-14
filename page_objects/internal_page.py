@@ -7,6 +7,9 @@ class InternalPage(Page):
     def is_logged_in(self):
         return self.is_element_present(locators.USER_MENU)
 
+    def is_logged_in_as(self, user):
+        return self.user_menu.text == user.username.title()
+
     @property
     def active_menu(self):
         return self.find_visible_element(locators.ACTIVE_MENU)

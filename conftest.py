@@ -11,6 +11,7 @@ def driver():
     driver = webdriver.Chrome()
     driver.implicitly_wait(5)
     driver.maximize_window()
+    driver.get('http://127.0.0.1/oxwall/')
     yield driver
     # Close browser
     driver.quit()

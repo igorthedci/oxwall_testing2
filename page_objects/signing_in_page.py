@@ -1,3 +1,5 @@
+from selenium.webdriver.support.expected_conditions import invisibility_of_element_located
+
 from page_objects.page import Page
 from locators.locator import SignInLocators
 
@@ -20,6 +22,9 @@ class SignInPage(Page):
     def sign_in_button(self):
         return self.find_visible_element(SignInLocators.SIGN_IN_BUTTON)
 
+    def is_this_page(self):
+        return self.is_element_present(SignInLocators.LOGIN_WINDOW_BOX)
+
     def input_username(self, username):
         self.username_field.clear()
         self.username_field.send_keys(username)
@@ -30,6 +35,7 @@ class SignInPage(Page):
 
     def submit_form(self):
         self.sign_in_button.click()
+        self.wait.until(invisibility_of_element_located(SignInLocators.LOGIN_BACKGROUND))
 
 
 if __name__ == "__main__":
