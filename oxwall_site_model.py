@@ -5,14 +5,34 @@ from selenium.webdriver.support import expected_conditions as EC
 from locators.locator import InternalPageLocators, SignInLocators
 import time
 
+from page_objects.dashboard_page import DashboardPage
+from page_objects.main_page import MainPage
+from page_objects.signing_in_page import SignInPage
+
 
 class OxwallSite:
     def __init__(self, driver):
         # Open Oxwall site
         self.driver = driver
         self.driver.get('http://127.0.0.1/oxwall/')
+
+        self.main_page = MainPage(self.driver)
+        self.dash_page = DashboardPage(self.driver)
+        self.sign_in_page = SignInPage(driver)
+
+
+
+
+
+
+
+
+
+
         self.wait = WebDriverWait(self.driver, 10)
         self.actions = ActionChains(self.driver)
+
+
 
     def login_as(self, user):
         """ Login to Oxwall site by user"""

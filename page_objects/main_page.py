@@ -1,10 +1,16 @@
 from page_objects.internal_page import InternalPage
+from page_objects.signing_in_page import SignInPage
 
 
 class MainPage(InternalPage):
     pass
 
     # TODO Add all elements and actions that you have in Main Page
+
+    def sign_in_click(self):
+        self.sign_in_menu.click()
+        # Maybe some explicit wait
+        # return SignInPage(self.driver)
 
 
 if __name__ == "__main__":

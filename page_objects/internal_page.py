@@ -4,6 +4,11 @@ from page_objects.page import Page
 
 
 class InternalPage(Page):
+    def __init__(self, driver):
+        super().__init__(driver)
+        # self.sign_in_menu = self.find_visible_element(locators.SIGN_IN_MENU)
+
+
     def is_logged_in(self):
         return self.is_element_present(locators.USER_MENU)
 
@@ -58,3 +63,12 @@ class InternalPage(Page):
         self.main_menu.click()
 
     # TODO you can do other actions that are common to all internal pages
+
+
+if __name__ == "__main__":
+    from selenium import webdriver
+    dr = webdriver.Chrome()
+    dr.get('http://127.0.0.1/oxwall/')
+    page = InternalPage(dr)
+    page.dashboard_menu.click()
+

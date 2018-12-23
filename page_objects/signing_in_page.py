@@ -1,6 +1,7 @@
 from selenium.webdriver.support.expected_conditions import invisibility_of_element_located
 
-from page_objects.page import Page
+from page_objects.dashboard_page import DashboardPage
+from page_objects.page import Page, InputTextElement
 from locators.locator import SignInLocators
 
 
@@ -12,11 +13,11 @@ class SignInPage(Page):
 
     @property
     def username_field(self):
-        return self.find_visible_element(SignInLocators.LOGIN_FIELD)
+        return InputTextElement(self.find_visible_element(SignInLocators.LOGIN_FIELD))
 
     @property
     def password_field(self):
-        return self.find_visible_element(SignInLocators.PASS_FIELD)
+        return InputTextElement(self.find_visible_element(SignInLocators.PASS_FIELD))
 
     @property
     def sign_in_button(self):
@@ -25,18 +26,18 @@ class SignInPage(Page):
     def is_this_page(self):
         return self.is_element_present(SignInLocators.LOGIN_WINDOW_BOX)
 
-    def input_username(self, username):
-        self.username_field.clear()
-        self.username_field.send_keys(username)
-
-    def input_password(self, password):
-        self.password_field.clear()
-        self.password_field.send_keys(password)
+    # def input_username(self, username):
+    #     self.username_field.clear()
+    #     self.username_field.send_keys(username)
+    #
+    # def input_password(self, password):
+    #     self.password_field.clear()
+    #     self.password_field.send_keys(password)
 
     def submit_form(self):
         self.sign_in_button.click()
-        self.wait.until(invisibility_of_element_located(SignInLocators.LOGIN_BACKGROUND))
-
+        self.wait.until(invisibility_of_element_located(SignInLocators.LOGIN_BACKGROUND), "DashPage doesn't appear")
+        # return DashboardPage(self.driver)
 
 if __name__ == "__main__":
     from selenium import webdriver
