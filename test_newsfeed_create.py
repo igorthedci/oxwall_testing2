@@ -8,7 +8,7 @@ def test_add_text_status(driver, signed_in_user):
     app = OxwallSite(driver)
     old_status_list = app.dash_page.status_list
     # Actions:
-    app.dash_page.status_text_field.send_keys(status.text)
+    app.dash_page.status_text_field.input(status.text)
     app.dash_page.send_button.click()
     app.dash_page.wait_until_new_status_appeared()
     # Verification that new status with this text appeared

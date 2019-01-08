@@ -3,6 +3,7 @@ from selenium.webdriver.support.expected_conditions import invisibility_of_eleme
 from page_objects.dashboard_page import DashboardPage
 from page_objects.page import Page
 from locators.locator import SignInLocators
+from page_objects.page_elements.input_text_field import InputTextElement
 
 
 class SignInPage(Page):
@@ -13,11 +14,11 @@ class SignInPage(Page):
 
     @property
     def username_field(self):
-        return self.find_visible_element(SignInLocators.LOGIN_FIELD)
+        return InputTextElement(self.find_visible_element(SignInLocators.LOGIN_FIELD))
 
     @property
     def password_field(self):
-        return self.find_visible_element(SignInLocators.PASS_FIELD)
+        return InputTextElement(self.find_visible_element(SignInLocators.PASS_FIELD))
 
     @property
     def sign_in_button(self):
@@ -25,14 +26,6 @@ class SignInPage(Page):
 
     def is_this_page(self):
         return self.is_element_present(SignInLocators.LOGIN_WINDOW_BOX)
-
-    def input_username(self, username):
-        self.username_field.clear()
-        self.username_field.send_keys(username)
-
-    def input_password(self, password):
-        self.password_field.clear()
-        self.password_field.send_keys(password)
 
     def submit_form(self):
         self.sign_in_button.click()
@@ -51,12 +44,6 @@ if __name__ == "__main__":
 
     sign_in_page = SignInPage(driver)
     # 1st type of using:
-    sign_in_page.username_field.clear()
-    sign_in_page.username_field.send_keys("something")
-    sign_in_page.password_field.clear()
-    sign_in_page.password_field.send_keys("some_pass")
-    sign_in_page.sign_in_button.click()
-    # 2nd type of using:
-    sign_in_page.input_username("something")
-    sign_in_page.input_password("some_pass")
+    sign_in_page.username_field.input("something")
+    sign_in_page.password_field.input("some_pass")
     sign_in_page.submit_form()
