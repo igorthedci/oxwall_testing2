@@ -11,4 +11,4 @@ def test_login_using_page_object(driver, user):
     app.sign_in_page.submit_form()
     assert app.dash_page.is_this_page()
     assert app.dash_page.is_logged_in()
-    assert app.dash_page.is_logged_in_as(user)
+    assert app.dash_page.user_menu.text == user.real_name
