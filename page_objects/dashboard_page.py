@@ -1,6 +1,6 @@
-import time
 from selenium.webdriver.common.by import By
 
+from page_objects.custom_expected_condition.expected_condition import amount_of_element_located
 from page_objects.internal_page import InternalPage
 
 
@@ -27,5 +27,5 @@ class DashboardPage(InternalPage):
         return self.driver.find_elements(*self.STATUS_BOX)
 
     def wait_until_new_status_appeared(self):
-        # TODO You need to do smart explicit wait!!!
-        time.sleep(5)
+        old_number = len(self.status_list)
+        self.wait.until(amount_of_element_located(self.STATUS_BOX, old_number+1))
