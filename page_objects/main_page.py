@@ -9,7 +9,7 @@ class MainPage(InternalPage):
     def sign_in_click(self):
         self.sign_in_menu.click()
         # Maybe some explicit wait
-        return SignInPage(self.driver)
+        # return SignInPage(self.driver)
 
 
 if __name__ == "__main__":

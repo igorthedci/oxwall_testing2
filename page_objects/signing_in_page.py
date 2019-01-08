@@ -37,7 +37,7 @@ class SignInPage(Page):
     def submit_form(self):
         self.sign_in_button.click()
         self.wait.until(invisibility_of_element_located(SignInLocators.LOGIN_BACKGROUND))
-        return DashboardPage(self.driver)
+        # return DashboardPage(self.driver)
 
 
 if __name__ == "__main__":

@@ -5,12 +5,26 @@ from selenium.webdriver.support import expected_conditions as EC
 from locators.locator import InternalPageLocators, SignInLocators
 import time
 
+from page_objects.dashboard_page import DashboardPage
+from page_objects.main_page import MainPage
+from page_objects.signing_in_page import SignInPage
+
 
 class OxwallSite:
     def __init__(self, driver):
         # Open Oxwall site
         self.driver = driver
         self.driver.get('http://127.0.0.1/oxwall/')
+
+        self.main_page = MainPage(self.driver)
+        self.dash_page = DashboardPage(self.driver)
+        self.sign_in_page = SignInPage(driver)
+
+
+
+
+    # Now these actions are in Page Objects.
+    # TODO: clean all this old code, and use new approach in all parts of project
         self.wait = WebDriverWait(self.driver, 10)
         self.actions = ActionChains(self.driver)
 
