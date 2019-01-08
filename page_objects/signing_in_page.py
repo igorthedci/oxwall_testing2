@@ -36,7 +36,8 @@ class SignInPage(Page):
 
     def submit_form(self):
         self.sign_in_button.click()
-        self.wait.until(invisibility_of_element_located(SignInLocators.LOGIN_BACKGROUND))
+        self.wait.until(invisibility_of_element_located(SignInLocators.LOGIN_BACKGROUND),
+                        "Login background is still visible")
         # return DashboardPage(self.driver)
 
 

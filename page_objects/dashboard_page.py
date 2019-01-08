@@ -28,4 +28,4 @@ class DashboardPage(InternalPage):
 
     def wait_until_new_status_appeared(self):
         old_number = len(self.status_list)
-        self.wait.until(amount_of_element_located(self.STATUS_BOX, old_number+1))
+        self.wait.until(amount_of_element_located(self.STATUS_BOX, old_number+1), "No new status detected")

@@ -18,10 +18,10 @@ class Page:
         return True
 
     def find_visible_element(self, locator):
-        return self.wait.until(visibility_of_element_located(locator))
+        return self.wait.until(visibility_of_element_located(locator), "No visible element with {}".format(locator))
 
     def find_clickable_element(self, locator):
-        return self.wait.until(element_to_be_clickable(locator))
+        return self.wait.until(element_to_be_clickable(locator), "No clickable element with {}".format(locator))
 
     @property
     def current_url(self):
