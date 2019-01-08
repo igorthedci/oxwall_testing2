@@ -1,5 +1,6 @@
 from selenium.webdriver.support.expected_conditions import invisibility_of_element_located
 
+from page_objects.dashboard_page import DashboardPage
 from page_objects.page import Page
 from locators.locator import SignInLocators
 
@@ -36,6 +37,7 @@ class SignInPage(Page):
     def submit_form(self):
         self.sign_in_button.click()
         self.wait.until(invisibility_of_element_located(SignInLocators.LOGIN_BACKGROUND))
+        return DashboardPage(self.driver)
 
 
 if __name__ == "__main__":
