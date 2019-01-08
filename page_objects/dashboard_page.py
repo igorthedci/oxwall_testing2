@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 from page_objects.custom_expected_condition.expected_condition import amount_of_element_located
 from page_objects.internal_page import InternalPage
+from page_objects.page_elements.status_box_element import StatusElement
 
 
 class DashboardPage(InternalPage):
@@ -24,7 +25,7 @@ class DashboardPage(InternalPage):
 
     @property
     def status_list(self):
-        return self.driver.find_elements(*self.STATUS_BOX)
+        return [StatusElement(el) for el in self.driver.find_elements(*self.STATUS_BOX)]
 
     def wait_until_new_status_appeared(self):
         old_number = len(self.status_list)
