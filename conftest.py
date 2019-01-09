@@ -1,4 +1,5 @@
 import json
+import os.path
 import pytest
 from selenium import webdriver
 
@@ -18,7 +19,7 @@ def driver():
     driver.quit()
 
 
-with open("user_data.json", encoding="utf8") as f:
+with open(os.path.join("data", "user_data.json")) as f:
     user_data = json.load(f)
 
 
