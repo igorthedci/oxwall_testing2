@@ -19,7 +19,9 @@ def driver():
     driver.quit()
 
 
-with open(os.path.join("data", "user_data.json")) as f:
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(PROJECT_DIR, "data", "user_data.json")) as f:
     user_data = json.load(f)
 
 
