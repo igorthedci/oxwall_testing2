@@ -44,3 +44,10 @@ def signed_in_user(driver, user):
     app.login_as(user)
     yield user
     app.logout_as(user)
+
+
+@pytest.fixture()
+def logout(driver):
+    yield
+    app = OxwallSite(driver)
+    app.dash_page.sign_out()
