@@ -10,7 +10,9 @@ with open(os.path.join(PROJECT_DIR, "data", "status_data.json"), encoding="utf8"
 
 def random_string(maxlength):
     length = random.randint(1, maxlength)
-    symbols = string.ascii_letters + string.digits + string.punctuation + " " * 10
+    cyr_symbol = ''.join([chr(l) for l in range(0x0410, 0x0460)
+                          if chr(l).isprintable()])
+    symbols = cyr_symbol + string.ascii_letters + string.digits + string.punctuation + " " * 10
     # result = ""
     # for _ in range(length):
     #     result += random.choice(symbols)
