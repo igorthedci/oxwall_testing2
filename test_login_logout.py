@@ -1,7 +1,6 @@
 from oxwall_site_model import OxwallSite
 
 
-# TODO: parametrize to users, add non-admin users
 def test_login_using_page_object(driver, user):
     app = OxwallSite(driver)
     app.main_page.sign_in_click()

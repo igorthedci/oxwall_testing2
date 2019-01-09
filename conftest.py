@@ -17,9 +17,25 @@ def driver():
     driver.quit()
 
 
-@pytest.fixture()
-def user():
-    return User(username="admin", password="pass", real_name="Admin")
+user_data = [
+    {
+        "username": "tester",
+        "password": "secret",
+        "real_name": "How I am?",
+        "is_admin": False
+    },
+    {
+        "username": "admin",
+        "password": "pass",
+        "real_name": "Admin",
+        "is_admin": True
+    }
+]
+
+
+@pytest.fixture(params=user_data, ids=[str(user) for user in user_data])
+def user(request):
+    return User(**request.param)
 
 
 @pytest.fixture()
