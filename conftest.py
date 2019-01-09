@@ -1,3 +1,4 @@
+import json
 import pytest
 from selenium import webdriver
 
@@ -17,20 +18,8 @@ def driver():
     driver.quit()
 
 
-user_data = [
-    {
-        "username": "tester",
-        "password": "secret",
-        "real_name": "How I am?",
-        "is_admin": False
-    },
-    {
-        "username": "admin",
-        "password": "pass",
-        "real_name": "Admin",
-        "is_admin": True
-    }
-]
+with open("user_data.json", encoding="utf8") as f:
+    user_data = json.load(f)
 
 
 @pytest.fixture(params=user_data, ids=[str(user) for user in user_data])
