@@ -1,9 +1,14 @@
+import pytest
+
 from oxwall_site_model import OxwallSite
 from value_models.status import Status
 
 
-# TODO parametrize Status text
-def test_add_text_status(driver, signed_in_user):
+status_data = ["YGVhjbunbun2423", "Привіт!", "%&*^&*()_$%%^"]
+status_data_repr = ["Alphanum", "Cyrillic", "Symbols"]
+
+@pytest.mark.parametrize("status_text", status_data, ids=status_data_repr)
+def test_add_text_status(driver, signed_in_user, status_text):
     status = Status(text="Shit happens!!!:(", user=signed_in_user)
     app = OxwallSite(driver)
     old_status_list = app.dash_page.status_list
