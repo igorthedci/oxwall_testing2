@@ -11,6 +11,8 @@ class User:
             "admin" if self.is_admin else "not admin"
         )
 
+    # TODO repr!!!
+
 
 if __name__ == "__main__":
     user = User("Masha", "Pupkin")

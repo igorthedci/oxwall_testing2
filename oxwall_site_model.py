@@ -1,3 +1,4 @@
+# TODO clean all these old imports after using new PageObjects approach
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -29,6 +30,7 @@ class OxwallSite:
         self.actions = ActionChains(self.driver)
 
     def login_as(self, user):
+        # TODO: use Page objects
         """ Login to Oxwall site by user"""
         driver = self.driver
         driver.find_element(*InternalPageLocators.SIGN_IN_MENU).click()
@@ -44,11 +46,13 @@ class OxwallSite:
         wait.until(EC.invisibility_of_element_located(SignInLocators.LOGIN_BACKGROUND))
 
     def logout_as(self, user):
+        # TODO: use Page objects
         menu = self.driver.find_element(*InternalPageLocators.USER_MENU)
         self.actions.move_to_element(menu).perform()
         self.driver.find_element(*InternalPageLocators.SIGN_OUT_LINK).click()
 
     def add_new_text_status(self, text):
+        # TODO: use Page objects
         driver = self.driver
         # Write some text to Newsfeed form and send it
         newsfeed = driver.find_element_by_name("status")
@@ -58,16 +62,3 @@ class OxwallSite:
         newsfeed.send_keys(text)
         send_button = driver.find_element_by_name("save")
         send_button.click()
-
-    def wait_until_new_status_appeared(self):
-        # TODO You need to do smart explicit wait!!!
-        time.sleep(5)
-
-    def get_newsfeed_list(self):
-        return self.driver.find_elements_by_class_name("ow_newsfeed_content")
-
-    def get_newsfeed_users(self):
-        return self.driver.find_elements(By.CSS_SELECTOR, "div.ow_newsfeed_string.ow_small.ow_smallmargin > a")
-
-    def get_newsfeed_times(self):
-        return self.driver.find_elements(By.CSS_SELECTOR, "div.ow_newsfeed_btns.ow_small.ow_remark.clearfix > a")
