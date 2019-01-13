@@ -3,12 +3,14 @@
         "username": "tester",
         "password": "secret",
         "real_name": "How I am?",
+        "email": "test9@gmail.com",
         "is_admin": false
     },
     {
-        "username": "admin",
-        "password": "pass",
-        "real_name": "Admin",
-        "is_admin": true
+        "username": "test",
+        "password": "secret",
+        "real_name": "Something",
+        "email": "test9@gmail.com",
+        "is_admin": false
     }
 ]

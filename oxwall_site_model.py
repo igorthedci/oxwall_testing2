@@ -15,7 +15,7 @@ class OxwallSite:
     def __init__(self, driver):
         # Open Oxwall site
         self.driver = driver
-        self.driver.get('http://127.0.0.1/oxwall/')
+        # self.driver.get('http://127.0.0.1/oxwall/')
 
         self.main_page = MainPage(self.driver)
         self.dash_page = DashboardPage(self.driver)
