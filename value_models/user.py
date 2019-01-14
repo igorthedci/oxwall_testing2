@@ -1,7 +1,8 @@
 class User:
-    def __init__(self, username="", password="", real_name="", is_admin=False):
+    def __init__(self, username="", password="", email="", real_name="", is_admin=False, _comment=None):
         self.username = username
         self.password = password
+        self.email = email
         self.real_name = real_name
         self.is_admin = is_admin
 
@@ -11,7 +12,13 @@ class User:
             "admin" if self.is_admin else "not admin"
         )
 
-    # TODO repr!!!
+    def __repr__(self):
+        return "{}: username={}, password={}, {}".format(
+            self.__class__,
+            self.username,
+            self.password,
+            "admin" if self.is_admin else "not admin"
+        )
 
 
 if __name__ == "__main__":

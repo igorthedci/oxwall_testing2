@@ -1,14 +1,16 @@
 [
-    {
-        "username": "tester",
-        "password": "secret",
-        "real_name": "How I am?",
-        "is_admin": false
-    },
-    {
-        "username": "admin",
-        "password": "pass",
-        "real_name": "Admin",
-        "is_admin": true
-    }
+  {
+    "username": "admin",
+    "password": "pass",
+    "real_name": "Admin",
+    "is_admin": true,
+    "_comment": "This is temporary admin here"
+  },
+  {
+    "username": "test",
+    "password": "secret",
+    "email": "test@test.com",
+    "real_name": "How I am?",
+    "is_admin": false
+  }
 ]
