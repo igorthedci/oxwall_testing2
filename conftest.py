@@ -9,12 +9,21 @@ from value_models.user import User
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-with open(os.path.join(PROJECT_DIR, "config.json")) as f:
-    config = json.load(f)
+
+def pytest_addoption(parser):
+    parser.addoption("--config", action="store", default="config.json", help="config file")
 
 
 @pytest.fixture(scope="session")
-def db():
+def config(request):
+    filename = request.config.getoption("--config")
+    with open(os.path.join(PROJECT_DIR, filename)) as f:
+        config = json.load(f)
+        return config
+
+
+@pytest.fixture(scope="session")
+def db(config):
     db = DBConnector(config["db"])
     yield db
     db.close()
@@ -45,7 +54,7 @@ def user(request, db):
 
 
 @pytest.fixture()
-def admin():
+def admin(config):
     params = config["web"]["admin"]
     return User(**params, is_admin=True, real_name=params["username"].title())
 
