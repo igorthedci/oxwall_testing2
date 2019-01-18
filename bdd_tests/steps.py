@@ -20,8 +20,9 @@ def status(text):
     return Status(text=text, user=signed_in_user)
 
 
-@when("I add this status in Dashboard page")
-def add_status(app, status):
+@when("I add a status with <text> in Dashboard page")
+def add_status(app, signed_in_user, text):
+    status = Status(text=text, user=signed_in_user)
     app.dash_page.status_text_field.input(status.text)
     app.dash_page.send_button.click()
     # app.dash_page.wait_until_new_status_appeared()
@@ -36,6 +37,6 @@ def wait_new_news(app, db, old_status_amount):
 @then('this status block has this <text> and author as this user and time "within 1 minute"')
 def verify_status_block(app, text, signed_in_user):
     new_status = app.dash_page.status_list[0]
-    assert text == new_status.text, f"Status text '{text}' is displayed incorrect with "
-    assert signed_in_user.real_name == new_status.user
+    assert text == new_status.text, f"Status text '{text}' is displayed incorrect"
+    assert signed_in_user.real_name == new_status.user, f"Status user is not displayed as '{signed_in_user.real_name}'"
     assert "within 1 minute" == new_status.time

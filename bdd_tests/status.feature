@@ -7,8 +7,7 @@ Feature: Status feature
   Scenario Outline: Add text status (without photo)
     Given initial amount of status in Oxwall database
     Given I as a logged user
-    Given I want to add status with <text>
-    When I add this status in Dashboard page
+    When I add a status with <text> in Dashboard page
     Then a new status block appears before old list of status
     Then this status block has this <text> and author as this user and time "within 1 minute"
 
