@@ -1,6 +1,7 @@
 from oxwall_site_model import OxwallSite
 
 
+# @pytest.mark.nondestructive
 def test_login_using_page_object(driver, user, logout):
     app = OxwallSite(driver)
     app.main_page.sign_in_click()
