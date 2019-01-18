@@ -7,9 +7,15 @@ from oxwall_site_model import OxwallSite
 from value_models.user import User
 
 
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(PROJECT_DIR, "config.json")) as f:
+    config = json.load(f)
+
+
 @pytest.fixture(scope="session")
 def db():
-    db = DBConnector()
+    db = DBConnector(config["db"])
     yield db
     db.close()
 
@@ -26,8 +32,6 @@ def driver(selenium, base_url):
     driver.quit()
 
 
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 with open(os.path.join(PROJECT_DIR, "data", "user_data.json")) as f:
     user_data = json.load(f)
 
@@ -42,7 +46,8 @@ def user(request, db):
 
 @pytest.fixture()
 def admin():
-    return User(username="admin", password="pass", real_name="Admin", is_admin=True)
+    params = config["web"]["admin"]
+    return User(**params, is_admin=True, real_name=params["username"].title())
 
 
 @pytest.fixture()

@@ -1,0 +1,14 @@
+{
+  "db": {
+    "host": "localhost",
+    "user": "root",
+    "password": "mysql",
+    "db": "oxwa166"
+  },
+  "web": {
+    "admin": {
+      "username": "admin",
+      "password": "pass"
+    }
+  }
+}

@@ -14,12 +14,9 @@ def _our_hash(password):
 
 
 class DBConnector:
-    def __init__(self):
+    def __init__(self, config):
         self.connection = pymysql.connect(
-            host='localhost',
-            user='root',
-            password='mysql',
-            db='oxwa166',
+            **config,
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor
         )
@@ -80,7 +77,13 @@ class DBConnector:
 
 
 if __name__ == "__main__":
-    db = DBConnector()
+    config = {
+        "host": "localhost",
+        "user": "root",
+        "password": "mysql",
+        "db": "oxwa166"
+    }
+    db = DBConnector(config)
     users = db.get_users()
     print(users[0])
     print(users)
