@@ -1,6 +1,6 @@
 {
   "web": {
-    "user": {
+    "admin": {
       "username": "admin",
       "password": "pass",
       "email": "admin@127.0.0.1"

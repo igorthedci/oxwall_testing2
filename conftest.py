@@ -19,7 +19,7 @@ def config(request):
     filename = request.config.getoption("--config")
     with open(os.path.join(PROJECT_DIR, filename)) as f:
         config = json.load(f)
-    admin_data = config["web"]["user"]
+    # admin_data = config["web"]["admin"]
     # admin_data.update({"is_admin": True})
     # user_data.append(admin_data)
     return config
@@ -48,9 +48,10 @@ def driver(selenium, base_url):
 def app(driver):
     return OxwallSite(driver)
 
+
 @pytest.fixture()
 def admin(config):
-    params = config["web"]["user"]
+    params = config["web"]["admin"]
     return User(**params, is_admin=True, real_name=params["username"].title())
 
 
