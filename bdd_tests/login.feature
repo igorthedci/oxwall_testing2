@@ -5,13 +5,14 @@ Feature: Login feature
   ...
 
   Scenario Outline: Login regular user
-    Given I as a registered user with <username>, <password>
+    Given I as a registered user with <username>, <password> and <real_name>
     When I sign in to Oxwall using Sign In button
     Then I see Dashboard page
     Then User menu has my <real_name>
 
     Examples:
-    | username            | password       | real_name       | email  |
-    | !@#%^&<a *%^*{}))_+ | secret         | dsdfsd          |        |
-    | New 1234098765!     | secret         | dsdfsd          |        |
-    | Привіт!             | secret         | dsdfsd          |        |
+    | username            | password       | real_name       |
+    | !@#%^&<a *%^*{}))_+ | secret         | dsdfsd          |
+    | !@#%^&<a *%^*{}))_+ | secret         | dsdfsd          |
+    | New 1234098765!     | secret         | dsdfsd          |
+    | Привіт!             | secret         | dsdfsd          |
