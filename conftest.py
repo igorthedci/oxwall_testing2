@@ -1,10 +1,17 @@
 import json
 import os.path
 import pytest
-from selenium import webdriver
 
+from db.db_connector import DBConnector
 from oxwall_site_model import OxwallSite
 from value_models.user import User
+
+
+@pytest.fixture(scope="session")
+def db():
+    db = DBConnector()
+    yield db
+    db.close()
 
 
 @pytest.fixture()
@@ -26,8 +33,11 @@ with open(os.path.join(PROJECT_DIR, "data", "user_data.json")) as f:
 
 
 @pytest.fixture(params=user_data, ids=[str(user) for user in user_data])
-def user(request):
-    return User(**request.param)
+def user(request, db):
+    user = User(**request.param)
+    db.create_user(user)
+    yield user
+    db.delete_user(user)
 
 
 @pytest.fixture()

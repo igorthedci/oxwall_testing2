@@ -1,7 +1,10 @@
 class User:
-    def __init__(self, username="", password="", real_name="", is_admin=False):
+    def __init__(self, id=None, username="", password="", email="",
+                 real_name="", is_admin=False):
+        self.id = id
         self.username = username
         self.password = password
+        self.email = email
         self.real_name = real_name
         self.is_admin = is_admin
 
