@@ -1,4 +1,5 @@
 # TODO clean all these old imports after using new PageObjects approach
+import allure
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -19,8 +20,6 @@ class OxwallSite:
         self.main_page = MainPage(self.driver)
         self.dash_page = DashboardPage(self.driver)
         self.sign_in_page = SignInPage(self.driver)
-
-
 
 
     # Now these actions are in Page Objects.
@@ -50,14 +49,15 @@ class OxwallSite:
         self.actions.move_to_element(menu).perform()
         self.driver.find_element(*InternalPageLocators.SIGN_OUT_LINK).click()
 
-    def add_new_text_status(self, text):
-        # TODO: use Page objects
-        driver = self.driver
-        # Write some text to Newsfeed form and send it
-        newsfeed = driver.find_element_by_name("status")
-        newsfeed.click()
-        newsfeed.clear()
-        newsfeed.click()
-        newsfeed.send_keys(text)
-        send_button = driver.find_element_by_name("save")
-        send_button.click()
+    @allure.step("WHEN I add a status with {status} in Dashboard page")
+    def add_new_text_status(self, status):
+        self.dash_page.status_text_field.input(status.text)
+        self.dash_page.send_button.click()
+
+    @allure.step('Then this status block has this {status.text} and author {user.real_name} '
+                 'and time "within 1 minute"')
+    def verify_text_status(self, status):
+        new_status = self.dash_page.status_list[0]
+        assert status.text == new_status.text
+        assert status.user.real_name == new_status.user
+        assert "within 1 minute" == new_status.time

@@ -1,4 +1,6 @@
 import json
+
+import allure
 import pymysql
 
 from value_models.status import Status
@@ -59,6 +61,7 @@ class DBConnector:
         self.connection.commit()
         return Status(text=data["status"])
 
+    @allure.step("GIVEN initial amount of status in Oxwall database")
     def count_news(self):
         with self.connection.cursor() as cursor:
             sql = """SELECT COUNT(*) FROM `ow_newsfeed_action`

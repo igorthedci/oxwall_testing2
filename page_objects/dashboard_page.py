@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.custom_expected_condition.expected_condition import amount_of_element_located
@@ -28,6 +29,7 @@ class DashboardPage(InternalPage):
     def status_list(self):
         return [StatusElement(el) for el in self.driver.find_elements(*self.STATUS_BOX)]
 
+    @allure.step("Then a new status block appears before old list of status")
     def wait_until_new_status_appeared(self):
         old_number = len(self.status_list)
         self.wait.until(amount_of_element_located(self.STATUS_BOX, old_number+1), "No new status detected")
