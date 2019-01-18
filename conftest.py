@@ -41,11 +41,16 @@ def user(request, db):
 
 
 @pytest.fixture()
-def signed_in_user(driver, user):
+def admin():
+    return User(username="admin", password="pass", real_name="Admin", is_admin=True)
+
+
+@pytest.fixture()
+def signed_in_user(driver, admin):
     app = OxwallSite(driver)
-    app.login_as(user)
-    yield user
-    app.logout_as(user)
+    app.login_as(admin)
+    yield admin
+    app.logout_as(admin)
 
 
 @pytest.fixture()
