@@ -36,6 +36,6 @@ def wait_new_news(app, db, old_status_amount):
 @then('this status block has this <text> and author as this user and time "within 1 minute"')
 def verify_status_block(app, text, signed_in_user):
     new_status = app.dash_page.status_list[0]
-    assert text == new_status.text, "Status text is displayed incorrect"
+    assert text == new_status.text, f"Status text '{text}' is displayed incorrect with "
     assert signed_in_user.real_name == new_status.user
     assert "within 1 minute" == new_status.time
